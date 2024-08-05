@@ -9,18 +9,42 @@ yards = input()
 print("Enter website url: ")
 input_url = input()
 
-# HTTP GET request
-response =requests.get(url="https://www.yarn.com/")
+# initialize lists
+urls = [input_url]
+yarns = []
 
-# feed HTML doc to BeautifulSoup
-soup = BeautifulSoup(response.content, "html.parser")
 
-# identify link elements
-link_elements = soup.select("a[href]")
+# TODO: add check to make sure input url is valid
 
-urls = []
+while len(urls) != 0:
 
-for link_element in link_elements:
-    url = link_element['href']
-    if input_url in url:
-        urls.append(url)
+    # pop top url
+    current_url = urls.pop()
+
+    # HTTP GET request
+    response =requests.get(current_url)
+
+    # feed HTML doc to BeautifulSoup
+    soup = BeautifulSoup(response.content, "html.parser")
+
+    # identify link elements
+    link_elements = soup.select("a[href]")
+
+    for link_element in link_elements:
+        url = link_element['href']
+        if input_url in url:
+            urls.append(url)
+    
+    # TODO: add check for correct yarn weight
+
+    # determine yarn information
+
+    yarn = {}
+    yarn["url"] = current_url
+    yarn["name"] = soup.select_one(".sf-heading__title").text()
+    yarn["price"] = soup.select_one(".product-price__regular")
+
+    yarns.append(yarn)
+
+# TODO: open CSV output file
+
