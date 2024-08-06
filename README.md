@@ -1,4 +1,6 @@
 ## Web Scraper to Find Yarn 🧶
+### Tech used: Python (BeautifulSoup library)
+
 ### Problem:
 I love to knit! In the world of knitting, choosing the right yarn is a crucial step in every project. 
 One key factor in this selection process is the yarn's thickness, which is often determined by its yardage per gram. However, finding yarn options with a specific weight can be challenging, as it often requires sifting through hundreds of options!
@@ -20,7 +22,6 @@ It will return the URLs and details of yarns that match their criteria in a .csv
 <img src="example_csv.png" height= "200">
 
 ### How it's made:
-#### Tech used: Python (BeautifulSoup library)
 Using the initial URL from the user, a list of URLs to visit is initialized. Then, the BeautifulSoup library is used to parse the HTML content of each page. The script checks each page for product links, adding unvisited links to the queue. It identifies potential product pages by detecting specific text patterns and calculates the yards per 50 grams of each yarn product encountered. If the calculated value falls within the user's specified range, the script gathers relevant product details, such as the name, price, grams, and yards, and stores them in a list. Finally, the gathered yarn data is exported to a CSV file named yarns.csv.
 
 ### Future additions:
